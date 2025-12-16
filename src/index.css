@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Oswald:wght@200..700&display=swap');
+
+:root {
+  --primary-background: #E2E6EA;
+  --darker-primary-background: #DFE3E7;
+  --primary-color: #0c73fe;
+  --primary-text: #0c131d;
+  --lighter-primary-text: #6a686e;
+  --error-color: #ef4444;
+
+  --heading-font: 'Oswald';
+  --body-font: 'Inter';
+  color: var(--light-text);
+
+  background-color: var(--primary-background);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: var(--body-font);
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 2rem;
+}
+
+h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.75rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.25rem;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--heading-font);
+  color: var(--primary-text);
+}
+
+::-webkit-input-placeholder {
+  color: var(--lighter-primary-text);
+}
+:-moz-placeholder {
+  color: var(--lighter-primary-text);
+  opacity:  1;
+}
+::-moz-placeholder {
+  color: var(--lighter-primary-text);
+  opacity:  1;
+}
+:-ms-input-placeholder {
+  color: var(--lighter-primary-text);
+}
+::-ms-input-placeholder {
+  color: var(--lighter-primary-text);
+}
+
+::placeholder {
+  color: var(--lighter-primary-text);
+}

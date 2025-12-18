@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { register, login } from "../services/auth.service.ts";
 import { logout } from "../services/auth.service.ts";
-import {ApiError} from "../errors/AppError.ts";
+import {ApiError} from "../errors/ApiError.ts";
 
 export async function registerUser(req: Request, res: Response): Promise<void> {
     const token = await register(req.body);

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { ApiError } from "../errors/AppError.ts";
+import { ApiError } from "../errors/ApiError.ts";
 import { isTokenRevoked } from "../repositories/token.repository.ts";
 
 const JWT_SECRET = process.env.JWT_SECRET as string;

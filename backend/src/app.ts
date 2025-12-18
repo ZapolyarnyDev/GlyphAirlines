@@ -1,9 +1,10 @@
 import "dotenv/config";
 import express, { Request, Response, NextFunction } from "express";
-import {ApiError} from "./errors/AppError.ts";
+import {ApiError} from "./errors/ApiError.ts";
 import airportRoutes from "./routes/airport.routes.ts";
 import flightRoutes from "./routes/flight.routes.ts";
 import authRoutes from "./routes/auth.routes.ts";
+import bookingRoutes from "./routes/booking.routes.ts";
 
 const app = express();
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
@@ -17,6 +18,7 @@ app.get("/", (_req: Request, res: Response) => {
 app.use("/api/v1/airports", airportRoutes);
 app.use("/api/v1/flights", flightRoutes);
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/bookings", bookingRoutes);
 
 app.use((_req: Request, res: Response) => {
     res.status(404).json({ message: "Resource not found" });

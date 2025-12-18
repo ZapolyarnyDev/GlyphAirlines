@@ -2,7 +2,32 @@
     width: 100%;
 }
 
-.inputs {
-    margin: 1rem 0;
+.fields {
+    display: grid;
+    gap: 1rem;
     width: 100%;
+}
+
+.field {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.label {
+    color: var(--text);
+    font-weight: 650;
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+}
+
+.grid2 {
+    display: grid;
+    gap: 1rem;
+}
+
+@media (min-width: 520px) {
+    .grid2 {
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+    }
 }

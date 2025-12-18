@@ -1,8 +1,21 @@
-.inputs {
-    margin: 1rem 0;
+.form {
     width: 100%;
 }
 
-.form {
+.fields {
+    display: grid;
+    gap: 1rem;
     width: 100%;
+}
+
+.field {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.label {
+    color: var(--text);
+    font-weight: 650;
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
 }

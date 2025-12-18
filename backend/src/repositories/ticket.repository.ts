@@ -1,12 +1,25 @@
-import { PoolClient } from "pg";
+import {PoolClient, Submittable} from "pg";
+import { db } from "../config/db.config.ts";
 
-export interface TicketRow {
+export interface TicketRow extends Submittable {
     id: number;
     booking_id: number;
     schedule_id: number;
     passenger_id: number;
     seat: string;
     price: string;
+}
+
+export async function findByBookingId(
+    bookingId: number
+): Promise<TicketRow[]> {
+    const { rows } = await db.query<TicketRow>(
+        `SELECT id, booking_id, schedule_id, passenger_id, seat, price
+     FROM tickets
+     WHERE booking_id = $1`,
+        [bookingId]
+    );
+    return rows;
 }
 
 export async function countTicketsBySchedule(

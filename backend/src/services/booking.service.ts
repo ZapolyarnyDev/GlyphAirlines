@@ -1,5 +1,7 @@
 import { db } from "../config/db.config.ts";
 import { ApiError } from "../errors/ApiError.ts";
+import * as bookingRepo from "../repositories/booking.repository.ts";
+import * as ticketRepo from "../repositories/ticket.repository.ts";
 import { findScheduleById } from "../repositories/schedule.repository.ts";
 import { createBooking } from "../repositories/booking.repository.ts";
 import {
@@ -150,6 +152,53 @@ export async function createBookingTransaction(
             },
             tickets,
         };
+    } catch (e) {
+        await client.query("ROLLBACK");
+        throw e;
+    } finally {
+        client.release();
+    }
+}
+
+export async function getMyBookings(userId: number) {
+    return bookingRepo.findByUserId(userId);
+}
+
+export async function getMyBookingById(
+    userId: number,
+    bookingId: number
+) {
+    if (!Number.isFinite(bookingId)) {
+        throw new ApiError(400, "Invalid booking id");
+    }
+
+    const booking = await bookingRepo.findById(bookingId);
+    if (!booking) throw new ApiError(404, "Booking not found");
+    if (booking.user_id !== userId) throw new ApiError(403, "Forbidden");
+
+    const tickets = await ticketRepo.findByBookingId(bookingId);
+
+    return { booking, tickets };
+}
+
+export async function cancelMyBooking(
+    userId: number,
+    bookingId: number
+): Promise<void> {
+    if (!Number.isFinite(bookingId)) {
+        throw new ApiError(400, "Invalid booking id");
+    }
+
+    const booking = await bookingRepo.findById(bookingId);
+    if (!booking) throw new ApiError(404, "Booking not found");
+    if (booking.user_id !== userId) throw new ApiError(403, "Forbidden");
+    if (booking.status === "CANCELLED") return;
+
+    const client = await db.pool.connect();
+    try {
+        await client.query("BEGIN");
+        await bookingRepo.cancelBooking(client, bookingId);
+        await client.query("COMMIT");
     } catch (e) {
         await client.query("ROLLBACK");
         throw e;

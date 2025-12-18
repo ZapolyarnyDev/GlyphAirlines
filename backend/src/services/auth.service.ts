@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { ApiError } from "../errors/AppError.ts";
+import { ApiError } from "../errors/ApiError.ts";
 import * as userRepo from "../repositories/user.repository.ts";
 import * as profileRepo from "../repositories/profile.repository.ts";
 import { revokeToken } from "../repositories/token.repository.ts";

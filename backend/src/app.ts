@@ -1,0 +1,44 @@
+import "dotenv/config";
+import express, { Request, Response, NextFunction } from "express";
+import {ApiError} from "./errors/AppError.ts";
+
+const app = express();
+const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
+
+app.use(express.json());
+
+app.get("/", (_req: Request, res: Response) => {
+    res.status(200).json({ message: "GlyphAirlines Backend API is running!" });
+});
+
+app.use((_req: Request, res: Response) => {
+    res.status(404).json({ message: "Resource not found" });
+});
+
+app.use(
+    (
+        err: Error,
+        _req: Request,
+        res: Response,
+        _next: NextFunction
+    ): void => {
+        if (err instanceof ApiError) {
+            res.status(err.statusCode).json({
+                status: "error",
+                message: err.message,
+            });
+            return;
+        }
+
+        console.error(err);
+
+        res.status(500).json({
+            status: "error",
+            message: "Internal Server Error",
+        });
+    }
+);
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});

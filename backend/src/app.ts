@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express, { Request, Response, NextFunction } from "express";
 import {ApiError} from "./errors/AppError.ts";
+import airportRoutes from "./routes/airport.routes.ts";
 
 const app = express();
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
@@ -10,6 +11,8 @@ app.use(express.json());
 app.get("/", (_req: Request, res: Response) => {
     res.status(200).json({ message: "GlyphAirlines Backend API is running!" });
 });
+
+app.use("/api/v1/airports", airportRoutes);
 
 app.use((_req: Request, res: Response) => {
     res.status(404).json({ message: "Resource not found" });

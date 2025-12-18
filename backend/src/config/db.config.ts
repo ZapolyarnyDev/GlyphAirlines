@@ -15,5 +15,6 @@ const query = <T extends Submittable>(text: string, params?: any[]) => {
 export const db =  {
     query<T extends Submittable>(text: string, params?: any[]) {
         return query<T>(text, params);
-    }
+    },
+    pool
 }

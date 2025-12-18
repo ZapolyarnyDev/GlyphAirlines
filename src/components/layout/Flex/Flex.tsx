@@ -8,6 +8,7 @@ export const Flex = <T extends React.ElementType = 'div'>({
   justify = 'start',
   wrap = 'nowrap',
   gap = 0,
+  direction = 'row',
   ...props
 }: FlexProps<T>) => {
   const Component = as || 'div';
@@ -19,6 +20,7 @@ export const Flex = <T extends React.ElementType = 'div'>({
         alignItems: align,
         justifyContent: justify,
         flexWrap: wrap,
+        flexDirection: direction,
         gap,
       }}
     >

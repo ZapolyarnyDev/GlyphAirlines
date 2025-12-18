@@ -5,5 +5,6 @@ export interface FlexProps <T extends React.ElementType = 'div'>
   align?: 'start' | 'center' | 'end' | 'stretch';
   justify?: 'start' | 'center' | 'end' | 'between' | 'around';
   wrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
+  direction?: 'column' | 'row' | 'row-reverse' | 'column-reverse';
   gap?: number | string;
 }

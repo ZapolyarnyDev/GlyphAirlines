@@ -1,20 +1,20 @@
 .button {
-    padding:  0.75rem 0;
+    padding:  0.5em 0;
     border: 3px solid transparent;
     border-radius: 1rem;
     cursor: pointer;
 }
 
 .small {
-    padding: 0.75rem 2.4rem;
+    padding: 0.5rem 2.4rem;
 }
 
 .medium {
-    padding: 1rem 3.2rem;
+    padding: 0.75rem 3.2rem;
 }
 
 .large {
-    padding: 1.25rem 4rem;
+    padding: 1rem 4rem;
 }
 
 .full {

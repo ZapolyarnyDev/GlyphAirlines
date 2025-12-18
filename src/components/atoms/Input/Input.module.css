@@ -1,7 +1,7 @@
 .input {
-    padding: .75rem 1.5rem;
-    border: 3px solid transparent;
-    background-color: var(--darker-primary-background);
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--border-color);
+    background-color: transparent;
     border-radius: 1rem;
     color: var(--primary-text);
 }
@@ -16,6 +16,7 @@
     width: 1.2rem;
     height: 1.2rem;
     left: 1rem;
+    top: 1rem;
     pointer-events: none;
     z-index: 2;
 }
@@ -41,7 +42,7 @@
 }
 
 .inputWithIconPadding {
-    padding-left: 2.75rem !important;
+    padding-left: 3rem !important;
 }
 
 .input:focus,

@@ -1,36 +1,78 @@
-.input {
-    padding: 1rem 1.5rem;
-    border: 1px solid var(--border-color);
-    background-color: transparent;
-    border-radius: 1rem;
-    color: var(--primary-text);
-}
-
 .inputWrapper {
     position: relative;
     width: 100%;
+
+    background: var(--primary-background);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+
+    transition:
+            border-color 160ms ease,
+            box-shadow 160ms ease,
+            background-color 160ms ease;
+}
+
+.inputWrapper:hover {
+    border-color: rgba(12, 115, 254, 0.35);
+}
+
+.inputWrapper:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--focus-ring);
+    background: #ffffff;
+}
+
+.input {
+    width: 100%;
+    border: 0;
+    outline: none;
+    background: transparent;
+
+    color: var(--text);
+    font-weight: 550;
+
+    font-size: 0.98rem;
+    line-height: 1.15;
+
+    padding: 0.95rem 1rem;
+    border-radius: 1rem;
+}
+
+.withIcon {
+    padding-left: 2.75rem;
 }
 
 .icon {
     position: absolute;
-    width: 1.2rem;
-    height: 1.2rem;
-    left: 1rem;
-    top: 1rem;
+    left: 0.95rem;
+    top: 50%;
+    transform: translateY(-50%);
     pointer-events: none;
     z-index: 2;
+
+    width: 1.15rem;
+    height: 1.15rem;
+
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.small {
-    padding: 0.75rem 2.4rem;
+.inputWrapper:focus-within .icon {
+    color: var(--primary-color);
 }
 
-.medium {
-    padding: 1rem 3.2rem;
+.small .input {
+    padding: 0.85rem 1rem;
 }
 
-.large {
-    padding: 1.25rem 4rem;
+.medium .input {
+    padding: 1rem 1.05rem;
+}
+
+.large .input {
+    padding: 1.15rem 1.1rem;
 }
 
 .full {
@@ -38,14 +80,28 @@
 }
 
 .error {
+    border-color: rgba(239, 68, 68, 0.65);
+    background: rgba(239, 68, 68, 0.03);
+}
+
+.error:focus-within {
     border-color: var(--error-color);
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.18);
 }
 
-.inputWithIconPadding {
-    padding-left: 3rem !important;
+.error .icon {
+    color: rgba(239, 68, 68, 0.9);
 }
 
-.input:focus,
-.input:active {
-    outline: none;
+.disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.disabled .input {
+    cursor: not-allowed;
+}
+
+.input::placeholder {
+    color: var(--lighter-primary-text);
 }

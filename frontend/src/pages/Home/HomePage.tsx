@@ -11,6 +11,7 @@ import { getAirportsApi } from '../../shared/api/airports'
 import { searchFlightsApi } from '../../shared/api/flights'
 import {PageWrapper} from "../../components/layout/PageWrapper/PageWrapper.tsx";
 import { getApiErrorMessage } from '../../shared/api/client'
+import {Header} from "../../components/organisms/Header/Header.tsx";
 
 function toISODate(d: Date) {
     const yyyy = d.getFullYear()
@@ -67,7 +68,7 @@ export const HomePage = () => {
         setError(null)
 
         if (!origin || !destination || !date) {
-            setError('Заполни origin, destination и дату')
+            setError('Заполните "откуда", "куда" и дату')
             return
         }
 
@@ -94,6 +95,7 @@ export const HomePage = () => {
 
     return (
        <PageWrapper>
+           <Header isAuth={false}/>
             <section className={styles.hero}>
                 <h1 className={styles.title}>Бронирование билетов</h1>
                 <p className={styles.subtitle}>
@@ -148,6 +150,7 @@ export const HomePage = () => {
                                 </label>
                                 <Input
                                     id="date"
+                                    type="date"
                                     icon={<CalendarDays />}
                                     inputSize="full"
                                     value={date}
@@ -157,7 +160,7 @@ export const HomePage = () => {
                         </div>
 
                         <div className={styles.actions}>
-                            <Button size="full" onClick={runSearch} disabled={loadingFlights}>
+                            <Button size="small" onClick={runSearch} disabled={loadingFlights}>
                                 {loadingFlights ? 'Ищем рейсы…' : 'Найти рейсы'}
                             </Button>
 
@@ -179,7 +182,7 @@ export const HomePage = () => {
                     <p className={styles.resultsSubtitle}>
                         {flights.length
                             ? `Найдено: ${flights.length}`
-                            : 'Сделай поиск, чтобы увидеть список'}
+                            : 'Сделайте поиск, чтобы увидеть список'}
                     </p>
                 </div>
 

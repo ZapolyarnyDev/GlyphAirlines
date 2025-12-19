@@ -15,6 +15,10 @@ export async function register(data: {
     middleName?: string;
     birthday: string;
 }) {
+    if (!data.email || !data.email.includes('@')) {
+        throw new ApiError(400, 'Invalid email format');
+    }
+
     const exists = await userRepo.findByEmail(data.email);
     if (exists) throw new ApiError(409, "User already exists");
 

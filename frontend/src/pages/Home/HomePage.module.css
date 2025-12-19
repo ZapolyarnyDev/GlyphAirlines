@@ -1,0 +1,262 @@
+.hero {
+    margin-top: 1rem;
+}
+
+.title {
+    line-height: 1.05;
+}
+
+.subtitle {
+    margin-top: 0.55rem;
+    color: var(--text-muted);
+    font-weight: 550;
+    line-height: 1.4;
+}
+
+.searchCard {
+    margin-top: 1.4rem;
+    background: var(--lighter-primary-background);
+    border: 1px solid var(--border-color);
+    border-radius: 1.25rem;
+    padding: 1.25rem;
+
+    box-shadow:
+            0 14px 40px rgba(15, 23, 42, 0.10),
+            0 2px 10px rgba(15, 23, 42, 0.06);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr 1fr;
+    gap: 0.8rem;
+    align-items: end;
+}
+
+.field {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.label {
+    color: var(--text);
+    font-weight: 650;
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+}
+
+.swap {
+    height: 2.8rem;
+    width: 2.8rem;
+    border-radius: 0.95rem;
+
+    background: var(--primary-background);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--text-muted);
+
+    transition:
+            transform 80ms ease,
+            color 160ms ease,
+            box-shadow 160ms ease,
+            background-color 160ms ease;
+}
+
+.swap:hover {
+    color: var(--text);
+    background: var(--lighter-primary-background);
+    box-shadow:
+            0 10px 26px rgba(15, 23, 42, 0.10),
+            0 1px 6px rgba(15, 23, 42, 0.06);
+}
+
+.swap:active {
+    transform: translateY(1px);
+}
+
+.swap:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px var(--focus-ring);
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.hint {
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: right;
+}
+
+.error {
+    background: rgba(239, 68, 68, 0.10);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    color: var(--text);
+    border-radius: 1rem;
+    padding: 0.85rem 0.95rem;
+    font-weight: 650;
+}
+
+.results {
+    margin-top: 2rem;
+}
+
+.resultsHeader {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.resultsTitle {
+    font-size: 1.4rem;
+}
+
+.resultsSubtitle {
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.list {
+    display: grid;
+    gap: 0.9rem;
+}
+
+.card {
+    background: var(--lighter-primary-background);
+    border: 1px solid var(--border-color);
+    border-radius: 1.25rem;
+    padding: 1.15rem;
+
+    box-shadow:
+            0 10px 26px rgba(15, 23, 42, 0.08),
+            0 1px 6px rgba(15, 23, 42, 0.05);
+}
+
+.cardTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.route {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.iata {
+    font-family: var(--heading-font);
+    font-weight: 850;
+    color: var(--text);
+    letter-spacing: 0.06em;
+}
+
+.routeLine {
+    width: 3.2rem;
+    height: 2px;
+    background: rgba(12, 115, 254, 0.25);
+    border-radius: 99px;
+}
+
+.meta {
+    text-align: right;
+}
+
+.flightNo {
+    font-weight: 800;
+    color: var(--text);
+}
+
+.airline {
+    color: var(--text-muted);
+    font-weight: 650;
+    font-size: 0.95rem;
+}
+
+.cardBody {
+    margin-top: 1rem;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.9rem;
+
+    background: var(--primary-background);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 0.9rem;
+}
+
+.timeBlock {
+    display: grid;
+    gap: 0.25rem;
+}
+
+.timeLabel {
+    color: var(--text-muted);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.01em;
+}
+
+.timeValue {
+    color: var(--text);
+    font-weight: 800;
+}
+
+.place {
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.9rem;
+    line-height: 1.25;
+}
+
+.aircraft {
+    display: grid;
+    gap: 0.25rem;
+}
+
+.aircraftValue {
+    color: var(--text);
+    font-weight: 800;
+}
+
+.empty {
+    margin-top: 0.25rem;
+    color: var(--text-muted);
+    font-weight: 650;
+    padding: 1.2rem 0.2rem;
+}
+
+@media (max-width: 860px) {
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .swap {
+        display: none;
+    }
+
+    .actions {
+        grid-template-columns: 1fr;
+    }
+
+    .hint {
+        text-align: left;
+    }
+
+    .cardBody {
+        grid-template-columns: 1fr;
+    }
+}

@@ -5,6 +5,7 @@ import airportRoutes from "./routes/airport.routes.ts";
 import flightRoutes from "./routes/flight.routes.ts";
 import authRoutes from "./routes/auth.routes.ts";
 import bookingRoutes from "./routes/booking.routes.ts";
+import cors from 'cors'
 
 const app = express();
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
@@ -47,6 +48,12 @@ app.use(
         });
     }
 );
+
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+}))
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

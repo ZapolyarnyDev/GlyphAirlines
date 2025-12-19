@@ -12,6 +12,7 @@ import { searchFlightsApi } from '../../shared/api/flights'
 import {PageWrapper} from "../../components/layout/PageWrapper/PageWrapper.tsx";
 import { getApiErrorMessage } from '../../shared/api/client'
 import {Header} from "../../components/organisms/Header/Header.tsx";
+import {useAuth} from "../../auth/AuthContext.tsx";
 
 function toISODate(d: Date) {
     const yyyy = d.getFullYear()
@@ -34,6 +35,7 @@ function formatDT(iso: string) {
 export const HomePage = () => {
     const [airports, setAirports] = useState<Airport[]>([])
     const [loadingAirports, setLoadingAirports] = useState(true)
+    const { isAuth, user, logout } = useAuth()
 
     const [origin, setOrigin] = useState('')
     const [destination, setDestination] = useState('')
@@ -95,7 +97,11 @@ export const HomePage = () => {
 
     return (
        <PageWrapper>
-           <Header isAuth={false}/>
+           <Header
+               isAuth={isAuth}
+               userName={user?.email}
+               onLogoutClick={logout}
+           />
             <section className={styles.hero}>
                 <h1 className={styles.title}>Бронирование билетов</h1>
                 <p className={styles.subtitle}>

@@ -1,98 +1,138 @@
+import { useState } from 'react'
 import { Input } from '../../atoms/Input/Input'
 import { KeyIcon, Mail, User } from 'lucide-react'
 import { Flex } from '../../layout/Flex/Flex'
 import { Button } from '../../atoms/Button/Button'
 import styles from './Registration.module.css'
+import { api, getApiErrorMessage } from '../../../shared/api/client'
+import { useAuth } from '../../../auth/AuthContext'
 
 export const Registration = () => {
+    const { login } = useAuth()
+
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [middleName, setMiddleName] = useState('')
+    const [email, setEmail] = useState('')
+    const [birthday, setBirthday] = useState('')
+    const [password, setPassword] = useState('')
+    const [password2, setPassword2] = useState('')
+    const [loading, setLoading] = useState(false)
+
+    const submit = async (e: React.FormEvent) => {
+        e.preventDefault()
+
+        if (password !== password2) {
+            alert('Пароли не совпадают')
+            return
+        }
+
+        setLoading(true)
+
+        try {
+            const { data } = await api.post('/api/v1/auth/register', {
+                email,
+                password,
+                firstName,
+                lastName,
+                middleName: middleName || undefined,
+                birthday,
+            })
+            login(data.token)
+        } catch (e) {
+            alert(getApiErrorMessage(e))
+        } finally {
+            setLoading(false)
+        }
+    }
+
     return (
-        <Flex as="form" direction="column" gap="1.1rem" className={styles.form}>
+        <Flex
+            as="form"
+            onSubmit={submit}
+            direction="column"
+            gap="1.1rem"
+            className={styles.form}
+        >
             <div className={styles.fields}>
                 <div className={styles.grid2}>
                     <div className={styles.field}>
-                        <label className={styles.label} htmlFor="reg-lastName">
-                            Фамилия
-                        </label>
+                        <label className={styles.label}>Фамилия</label>
                         <Input
-                            id="reg-lastName"
-                            inputSize="full"
-                            placeholder="Иванов"
                             icon={<User />}
-                            autoComplete="family-name"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            required
                         />
                     </div>
 
                     <div className={styles.field}>
-                        <label className={styles.label} htmlFor="reg-firstName">
-                            Имя
-                        </label>
+                        <label className={styles.label}>Имя</label>
                         <Input
-                            id="reg-firstName"
-                            inputSize="full"
-                            placeholder="Иван"
                             icon={<User />}
-                            autoComplete="given-name"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            required
                         />
                     </div>
 
                     <div className={styles.field} style={{ gridColumn: '1 / -1' }}>
-                        <label className={styles.label} htmlFor="reg-middleName">
-                            Отчество
-                        </label>
+                        <label className={styles.label}>Отчество</label>
                         <Input
-                            id="reg-middleName"
-                            inputSize="full"
-                            placeholder="Петрович"
                             icon={<User />}
-                            autoComplete="additional-name"
+                            value={middleName}
+                            onChange={(e) => setMiddleName(e.target.value)}
                         />
                     </div>
                 </div>
 
                 <div className={styles.field}>
-                    <label className={styles.label} htmlFor="reg-email">
-                        E-mail
-                    </label>
+                    <label className={styles.label}>E-mail</label>
                     <Input
-                        id="reg-email"
                         type="email"
-                        inputSize="full"
-                        placeholder="name@example.com"
                         icon={<Mail />}
-                        autoComplete="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
                     />
                 </div>
 
                 <div className={styles.field}>
-                    <label className={styles.label} htmlFor="reg-password">
-                        Пароль
-                    </label>
+                    <label className={styles.label}>Дата рождения</label>
                     <Input
-                        id="reg-password"
-                        type="password"
-                        inputSize="full"
-                        placeholder="минимум 8 символов"
-                        icon={<KeyIcon />}
-                        autoComplete="new-password"
+                        type="date"
+                        value={birthday}
+                        onChange={(e) => setBirthday(e.target.value)}
+                        required
                     />
                 </div>
 
                 <div className={styles.field}>
-                    <label className={styles.label} htmlFor="reg-password2">
-                        Подтверждение
-                    </label>
+                    <label className={styles.label}>Пароль</label>
                     <Input
-                        id="reg-password2"
                         type="password"
-                        inputSize="full"
-                        placeholder="повторите пароль"
                         icon={<KeyIcon />}
-                        autoComplete="new-password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </div>
+
+                <div className={styles.field}>
+                    <label className={styles.label}>Подтверждение</label>
+                    <Input
+                        type="password"
+                        icon={<KeyIcon />}
+                        value={password2}
+                        onChange={(e) => setPassword2(e.target.value)}
+                        required
                     />
                 </div>
             </div>
 
-            <Button size="full">Зарегистрироваться</Button>
+            <Button size="full" disabled={loading}>
+                {loading ? 'Регистрация...' : 'Зарегистрироваться'}
+            </Button>
         </Flex>
     )
 }

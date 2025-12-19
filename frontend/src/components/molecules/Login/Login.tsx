@@ -6,9 +6,11 @@ import { Button } from '../../atoms/Button/Button'
 import styles from './Login.module.css'
 import { api, getApiErrorMessage } from '../../../shared/api/client.ts'
 import { useAuth } from '../../../auth/AuthContext.tsx'
+import { useNavigate } from 'react-router-dom'
 
 export const Login = () => {
     const { login } = useAuth()
+    const navigate = useNavigate()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -24,6 +26,7 @@ export const Login = () => {
                 password,
             })
             login(data.token)
+            navigate('/')
         } catch (e) {
             alert(getApiErrorMessage(e))
         } finally {

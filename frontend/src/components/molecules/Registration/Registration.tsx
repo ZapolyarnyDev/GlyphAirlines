@@ -6,9 +6,11 @@ import { Button } from '../../atoms/Button/Button'
 import styles from './Registration.module.css'
 import { api, getApiErrorMessage } from '../../../shared/api/client'
 import { useAuth } from '../../../auth/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 export const Registration = () => {
     const { login } = useAuth()
+    const navigate = useNavigate()
 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -39,6 +41,7 @@ export const Registration = () => {
                 birthday,
             })
             login(data.token)
+            navigate('/')
         } catch (e) {
             alert(getApiErrorMessage(e))
         } finally {
@@ -60,6 +63,7 @@ export const Registration = () => {
                         <label className={styles.label}>Фамилия</label>
                         <Input
                             icon={<User />}
+                            placeholder="Иванов"
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
                             required
@@ -70,6 +74,7 @@ export const Registration = () => {
                         <label className={styles.label}>Имя</label>
                         <Input
                             icon={<User />}
+                            placeholder="Иван"
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
                             required
@@ -80,6 +85,7 @@ export const Registration = () => {
                         <label className={styles.label}>Отчество</label>
                         <Input
                             icon={<User />}
+                            placeholder="Петрович (необязательно)"
                             value={middleName}
                             onChange={(e) => setMiddleName(e.target.value)}
                         />
@@ -91,6 +97,7 @@ export const Registration = () => {
                     <Input
                         type="email"
                         icon={<Mail />}
+                        placeholder="name@example.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
@@ -112,6 +119,7 @@ export const Registration = () => {
                     <Input
                         type="password"
                         icon={<KeyIcon />}
+                        placeholder="Минимум 8 символов"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
@@ -123,6 +131,7 @@ export const Registration = () => {
                     <Input
                         type="password"
                         icon={<KeyIcon />}
+                        placeholder="Повторите пароль"
                         value={password2}
                         onChange={(e) => setPassword2(e.target.value)}
                         required

@@ -1,0 +1,251 @@
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.inner {
+    width: min(72rem, 92vw);
+    margin: 0 auto;
+
+    height: 4.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    min-width: 12rem;
+}
+
+.brandIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.85rem;
+
+    background: var(--primary-background);
+    color: var(--primary-color);
+}
+
+.brandText {
+    font-family: var(--heading-font);
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    color: var(--primary-color);
+}
+
+.nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    padding: 0.25rem;
+    border-radius: 1rem;
+
+    background: var(--primary-background);
+    border: 1px solid var(--border-color);
+}
+
+.navLink {
+    text-decoration: none;
+    cursor: pointer;
+
+    height: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+
+    padding: 0 0.95rem;
+    border-radius: 0.85rem;
+
+    color: var(--text-muted);
+    font-weight: 650;
+    letter-spacing: 0.01em;
+
+    transition:
+            background-color 160ms ease,
+            color 160ms ease,
+            transform 80ms ease,
+            box-shadow 160ms ease;
+}
+
+.navLink:hover {
+    color: var(--text);
+}
+
+.navLink:active {
+    transform: translateY(1px);
+}
+
+.navLinkActive {
+    background: var(--lighter-primary-background);
+    color: var(--text);
+    box-shadow:
+            0 8px 18px rgba(15, 23, 42, 0.10),
+            0 1px 4px rgba(15, 23, 42, 0.06);
+}
+
+.navLink:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px var(--focus-ring);
+}
+
+.right {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    min-width: 12rem;
+}
+
+.loginButton {
+    height: 2.75rem;
+    border-radius: 0.95rem;
+}
+
+.account {
+    position: relative;
+}
+
+.accountButton {
+    height: 2.75rem;
+    padding: 0 0.75rem;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+
+    border-radius: 0.95rem;
+    background: var(--lighter-primary-background);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+
+    box-shadow:
+            0 10px 26px rgba(15, 23, 42, 0.10),
+            0 1px 6px rgba(15, 23, 42, 0.06);
+
+    transition:
+            transform 80ms ease,
+            box-shadow 160ms ease,
+            border-color 160ms ease;
+}
+
+.accountButton:hover {
+    border-color: rgba(12, 115, 254, 0.35);
+}
+
+.accountButton:active {
+    transform: translateY(1px);
+}
+
+.accountButton:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px var(--focus-ring);
+}
+
+.avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.75rem;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--primary-background);
+    border: 1px solid var(--border-color);
+    color: var(--text);
+}
+
+.accountText {
+    font-weight: 650;
+    letter-spacing: 0.01em;
+    color: var(--text);
+}
+
+.chevron {
+    color: var(--text-muted);
+    display: inline-flex;
+}
+
+.menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.55rem);
+
+    width: 14rem;
+    background: var(--lighter-primary-background);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 0.35rem;
+
+    box-shadow:
+            0 14px 40px rgba(15, 23, 42, 0.10),
+            0 2px 10px rgba(15, 23, 42, 0.06);
+}
+
+.menuItem {
+    width: 100%;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+
+    padding: 0.75rem 0.8rem;
+    border-radius: 0.8rem;
+
+    color: var(--text);
+    font-weight: 650;
+    letter-spacing: 0.01em;
+
+    transition: background-color 160ms ease;
+}
+
+.menuItem:hover {
+    background: var(--primary-background);
+}
+
+.menuItem:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px var(--focus-ring);
+}
+
+@media (max-width: 720px) {
+    .inner {
+        height: auto;
+        padding: 0.75rem 0;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .brand,
+    .right {
+        min-width: auto;
+    }
+
+    .nav {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .navLink {
+        flex: 1;
+        justify-content: center;
+    }
+}

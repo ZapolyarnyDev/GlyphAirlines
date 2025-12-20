@@ -4,6 +4,7 @@ import { Input } from '../../components/atoms/Input/Input'
 import { Button } from '../../components/atoms/Button/Button'
 import { Flex } from '../../components/layout/Flex/Flex'
 import { MapPin, CalendarDays, ArrowLeftRight } from 'lucide-react'
+import { createBookingApi } from '../../shared/api/booking.ts'
 
 import type { Airport } from '../../types/entities/airport'
 import type { FlightSearchResult } from '../../types/entities/flight'
@@ -93,6 +94,15 @@ export const HomePage = () => {
     const swap = () => {
         setOrigin(destination)
         setDestination(origin)
+    }
+
+    const openBooking = async (scheduleId: number) => {
+        try {
+            await createBookingApi(scheduleId)
+            alert('Бронь успешно создана')
+        } catch (e) {
+            alert(getApiErrorMessage(e))
+        }
     }
 
     return (
@@ -234,6 +244,21 @@ export const HomePage = () => {
                                         <div className={styles.aircraftValue}>{f.aircraft_model}</div>
                                     </div>
                                 </div>
+                                {isAuth && (
+                                    <Button
+                                        size="small"
+                                        onClick={() => openBooking(f.schedule_id)}
+                                    >
+                                        Забронировать
+                                    </Button>
+                                )}
+
+                                {!isAuth && (
+                                    <div className={styles.hint}>
+                                        Войдите, чтобы оформить бронь
+                                    </div>
+                                )}
+
 
                             </article>
                         )

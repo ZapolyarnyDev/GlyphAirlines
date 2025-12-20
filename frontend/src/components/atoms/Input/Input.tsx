@@ -1,7 +1,5 @@
 import styles from './Input.module.css'
 import type { InputProps } from '../../../types/components/Input/input-props'
-import { Flex } from '../../layout/Flex/Flex'
-
 export const Input = ({
                           type = 'text',
                           placeholder,
@@ -13,9 +11,10 @@ export const Input = ({
                           ...props
                       }: InputProps) => {
     return (
-        <Flex
-            align="center"
-            className={`${styles.inputWrapper} ${styles[inputSize]} ${disabled ? styles.disabled : ''} ${error ? styles.error : ''}`}
+        <div
+            className={`${styles.inputWrapper} ${styles[inputSize]} ${
+                disabled ? styles.disabled : ''
+            } ${error ? styles.error : ''}`}
         >
             {icon && <span className={styles.icon}>{icon}</span>}
             <input
@@ -26,6 +25,6 @@ export const Input = ({
                 required={required}
                 className={`${styles.input} ${icon ? styles.withIcon : ''}`}
             />
-        </Flex>
+        </div>
     )
 }
